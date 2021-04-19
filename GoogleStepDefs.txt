@@ -1,0 +1,18 @@
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+public class GoogleStepDefs {
+    private GooglePage googlePage = new GooglePage();
+    @Given("I navigate to Google search page")
+    public void navigateToGoogle() {
+       googlePage.navigateToURL("www.google.com");
+    }
+    @When("Search term ducks is entered")
+        public void searchDucks() {
+        googlePage.searchText("ducks");
+    }
+    @Then("Search results for ducks search are given") 
+    public void verifyDucks() {
+        googlePage.verifyDucksResults();
+    }
+}

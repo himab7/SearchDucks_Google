@@ -1,0 +1,31 @@
+import junit.framework.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+public class GooglePage {
+    //this could go into a base page, but can also live here
+    private WebDriver driver = new ChromeDriver();
+    public void navigateToURL(String url){
+        //navigate to page
+        driver.get(url);
+        driver.manage().window().maximize();
+        //wait for search box to be clickable
+        WebElement firstResult = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.name("q")));
+    }
+    public void searchText(String text){
+        //search text
+        driver.findElement(By.name("q")).sendKeys("ducks");
+        WebElement firstResult = new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.elementToBeClickable(By.linkText("DuckDuckGo — Privacy, simplified.")));
+    }
+    public void verifyDucksResults() {
+        //verify ducks in results
+        String search_key = driver.findElement(By.tagName("body")).getText();
+        Assert.assertTrue(search_key.contains("ducks"));
+    }
+}
