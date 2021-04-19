@@ -1,0 +1,5 @@
+Feature: Search Ducks
+  Scenario: Search for term 'ducks' on Google
+    Given I navigate to Google search page
+    When Search term ducks is entered
+    Then Search results for ducks search are given
